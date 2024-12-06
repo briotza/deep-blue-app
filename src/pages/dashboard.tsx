@@ -31,7 +31,6 @@ interface Notificacao {
 }
 
 
-// Tela do Dashboard
 const Dashboard = ({ navigation }: any) => {
     const [lastUpdate, setLastUpdate] = useState<string>(new Date().toLocaleString());
     const [incidentes, setIncidentes] = useState<Acidente[]>([]);
@@ -67,12 +66,6 @@ const Dashboard = ({ navigation }: any) => {
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Externo')} style={styles.button}>
                         <Text>Externo</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('Registrar')} style={styles.button}>
-                        <Text>Registrar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('Notificacoes')} style={styles.button}>
-                        <Text>Notificações</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Perfil')} style={styles.button}>
                         <Text>Perfil</Text>

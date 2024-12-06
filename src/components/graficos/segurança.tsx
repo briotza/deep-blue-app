@@ -18,8 +18,6 @@ interface Acidente {
   };
 }
 
-
-// Função para calcular os incidentes por mês
 const calcularIncidentesPorMes = (dados: Acidente[]) => {
   const meses = Array(12).fill(0);
   dados.forEach((incidente) => {
@@ -57,9 +55,9 @@ const Seguranca: React.FC<{ incidentes: Acidente[] }> = ({ incidentes }) => {
     backgroundColor: "#e26a00",
     backgroundGradientFrom: "#ffffff",
     backgroundGradientTo: "#ffffff",
-    decimalPlaces: 0, // Não mostrar decimais
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // Cor do texto
-    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // Cor do rótulo
+    decimalPlaces: 0, 
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, 
+    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     style: {
       borderRadius: 16,
     },
@@ -78,12 +76,12 @@ const Seguranca: React.FC<{ incidentes: Acidente[] }> = ({ incidentes }) => {
       <ScrollView horizontal={true}>
         <BarChart
           data={data}
-          width={Dimensions.get("window").width - 32} // Largura do gráfico
-          height={220} // Altura do gráfico
+          width={Dimensions.get("window").width - 32} 
+          height={220} 
           chartConfig={chartConfig}
-          verticalLabelRotation={30} // Rotação das etiquetas do eixo X
-          yAxisLabel="" // Adicionando a propriedade yAxisLabel com valor vazio
-          yAxisSuffix="" // Adicionando a propriedade yAxisSuffix com valor vazio
+          verticalLabelRotation={30} 
+          yAxisLabel="" 
+          yAxisSuffix="" 
         />
       </ScrollView>
     </View>

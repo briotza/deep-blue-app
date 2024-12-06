@@ -37,7 +37,7 @@ const Ambiental: React.FC<{ incidentes: Acidente[] }> = ({ incidentes }) => {
     datasets: [
       {
         data: dadosPorMes,
-        color: (opacity = 1) => `rgba(75, 192, 192, ${opacity})`, // Cor do gráfico
+        color: (opacity = 1) => `rgba(75, 192, 192, ${opacity})`,
         strokeWidth: 2,
       },
     ],
@@ -47,9 +47,9 @@ const Ambiental: React.FC<{ incidentes: Acidente[] }> = ({ incidentes }) => {
     backgroundColor: "#e26a00",
     backgroundGradientFrom: "#ffffff",
     backgroundGradientTo: "#ffffff",
-    decimalPlaces: 0, // Não mostrar decimais
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // Cor do texto
-    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // Cor do rótulo
+    decimalPlaces: 0, 
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, 
+    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, 
     style: {
       borderRadius: 16,
     },
@@ -68,12 +68,12 @@ const Ambiental: React.FC<{ incidentes: Acidente[] }> = ({ incidentes }) => {
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <BarChart
           data={data}
-          width={screenWidth * 1.2} // Largura maior para permitir rolagem horizontal
-          height={220} // Altura do gráfico
+          width={screenWidth * 1.2}
+          height={220}
           chartConfig={chartConfig}
-          verticalLabelRotation={30} // Rotação das etiquetas do eixo X
-          yAxisLabel="" // Adicionando a propriedade yAxisLabel com valor vazio
-          yAxisSuffix="" // Adicionando a propriedade yAxisSuffix com valor vazio
+          verticalLabelRotation={30}
+          yAxisLabel=""
+          yAxisSuffix="" 
         />
       </ScrollView>
     </View>

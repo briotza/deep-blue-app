@@ -19,8 +19,6 @@ type Acidente = {
   };
 };
 
-
-
 export default function Incidentes() {
   const [acidentes, setAcidentes] = useState<Acidente[]>([]);
   const [filtroTexto, setFiltroTexto] = useState<string>("");
