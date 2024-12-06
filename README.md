@@ -1,50 +1,47 @@
-# Welcome to your Expo app 👋
+# Deep Blue App - Frontend (Em construção)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+O projeto DeepBlue é uma plataforma avançada voltada para grandes empresas do setor petrolífero, com foco no monitoramento de incidentes ambientais e acidentes de trabalho em plataformas offshore. A plataforma visa transformar dados complexos em informações acessíveis e acionáveis, através de um dashboard dinâmico e interativo.  
+A solução é projetada para otimizar práticas de ESG (Governança Ambiental, Social e Corporativa), com insights que ajudam a reduzir impactos ambientais e operacionais, oferecendo às empresas uma abordagem proativa na gestão de riscos.
+Essa é a versão mobile da plataforma, para verificar a versão Web acesse https://github.com/briotza/deep-blue
 
-## Get started
+Este repositório mobile faz parte do projeto DeepBlue, desenvolvido como parte da composição da nota da matéria UPX V da FACENS. O projeto foi realizado pelos alunos Ciano Meliunas, Hillary Ferreira, Lincoln Barsotti e Vitor Guimarães.
 
-1. Install dependencies
+## Tecnologias Utilizadas
+- **React Native**
+- **TypeScript**
+- **Expo**
 
-   ```bash
-   npm install
-   ```
+## Instruções para Rodar o Projeto
 
-2. Start the app
+### Pré-requisitos
 
-   ```bash
-    npx expo start
-   ```
+Certifique-se de que você tenha os seguintes softwares instalados:
+- **Node.js** 
+- **npm** 
+- **Expo CLI**
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## **Passo 1: Clone o Repositório**  
+Clone o repositório para sua máquina local:  
 
 ```bash
-npm run reset-project
+git clone https://github.com/seu-usuario/deep-blue-app.git
+
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## **Passo 2: Instalar as Dependências**
+Navegue até o diretório do projeto e instale as dependências:
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## **Passo 3: Rodando o projeto no Expo**
+Para rodar o aplicativo em um emulador ou dispositivo físico com o Expo, execute o comando:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+expo start
+```
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Isso abrirá a interface do Expo no seu navegador.
+Você pode escanear o código QR exibido na tela com o aplicativo Expo Go (disponível na App Store ou Google Play) para rodar o app no seu dispositivo móvel.
+Se preferir, também pode rodar o aplicativo diretamente em um emulador (Android ou iOS) a partir do menu do Expo.
