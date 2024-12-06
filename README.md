@@ -44,5 +44,7 @@ expo start
 ```
 
 Isso abrirá a interface do Expo no seu navegador.
+
 Você pode escanear o código QR exibido na tela com o aplicativo Expo Go (disponível na App Store ou Google Play) para rodar o app no seu dispositivo móvel.
+
 Se preferir, também pode rodar o aplicativo diretamente em um emulador (Android ou iOS) a partir do menu do Expo.
