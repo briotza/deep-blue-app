@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Button, FlatList, StyleSheet } from "react-native";
 import { Picker } from '@react-native-picker/picker';
-
+import incidentesData from '../data/incidentes';
 
 type Acidente = {
   id: number;
@@ -19,48 +19,19 @@ type Acidente = {
   };
 };
 
-const initialAcidentes: Acidente[] = [
-  {
-    id: 1,
-    titulo: "Acidente 1",
-    tipo: "Colisão",
-    situacao: "Aberto",
-    data: "2024-12-05",
-    descricao: "Descrição do acidente",
-    horario: "14:00",
-  },
-  {
-    id: 2,
-    titulo: "Acidente 2",
-    tipo: "Atropelamento",
-    situacao: "Fechado",
-    data: "2024-12-06",
-    descricao: "Descrição do acidente",
-    horario: "15:30",
-    resolucao: {
-      responsavel: "João",
-      data: "2024-12-06",
-      descricao: "Resolução do acidente",
-      custo_total: 1000,
-    },
-  },
-  // Adicione mais acidentes conforme necessário
-];
+
 
 export default function Incidentes() {
-  const [acidentes, setAcidentes] = useState<Acidente[]>(initialAcidentes);
+  const [acidentes, setAcidentes] = useState<Acidente[]>([]);
   const [filtroTexto, setFiltroTexto] = useState<string>("");
   const [filtroSituacao, setFiltroSituacao] = useState<string>("Todos");
   const [acidenteSelecionado, setAcidenteSelecionado] = useState<Acidente | null>(null);
-  const [mostrarResolucao, setMostrarResolucao] = useState(false);
-  const [formData, setFormData] = useState({
-    responsavel: "",
-    data: "",
-    descricao: "",
-    custo_total: 0,
-  });
 
-  // Atualiza os dados filtrados com base nos filtros
+  useEffect(() => {
+    setAcidentes(incidentesData);
+  }, []);
+
+
   const filtrarDados = () => {
     return acidentes.filter((item) => {
       const textoMatch = item.titulo.toLowerCase().includes(filtroTexto.toLowerCase());
@@ -77,30 +48,6 @@ export default function Incidentes() {
 
   const handleSituacaoFilter = (situacao: string) => {
     setFiltroSituacao(situacao);
-  };
-
-  const handleEnviarResolucao = () => {
-    if (acidenteSelecionado) {
-      const updatedAcidente = {
-        ...acidenteSelecionado,
-        situacao: "Fechado",
-        resolucao: {
-          responsavel: formData.responsavel,
-          data: formData.data,
-          descricao: formData.descricao,
-          custo_total: formData.custo_total,
-        },
-      };
-
-      setAcidentes((prevAcidentes) =>
-        prevAcidentes.map((acidente) =>
-          acidente.id === acidenteSelecionado.id ? updatedAcidente : acidente
-        )
-      );
-
-      setMostrarResolucao(false);
-      setAcidenteSelecionado(null);
-    }
   };
 
   const renderItem = ({ item }: { item: Acidente }) => (
@@ -160,53 +107,10 @@ export default function Incidentes() {
             </View>
           )}
 
-          {acidenteSelecionado.situacao === "Aberto" && (
-            <Button
-              title={mostrarResolucao ? "Fechar Resolução" : "Adicionar Resolução"}
-              onPress={() => setMostrarResolucao(!mostrarResolucao)}
-            />
-          )}
-
           <Button
             title="Fechar Detalhes"
             onPress={() => setAcidenteSelecionado(null)}
           />
-        </View>
-      )}
-
-      {mostrarResolucao && acidenteSelecionado && acidenteSelecionado.situacao === "Aberto" && (
-        <View style={styles.formContainer}>
-          <Text style={styles.title}>Adicionar Resolução</Text>
-
-          <TextInput
-            style={styles.input}
-            placeholder="Responsável"
-            value={formData.responsavel}
-            onChangeText={(text) => setFormData({ ...formData, responsavel: text })}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Data"
-            value={formData.data}
-            onChangeText={(text) => setFormData({ ...formData, data: text })}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Descrição"
-            value={formData.descricao}
-            onChangeText={(text) => setFormData({ ...formData, descricao: text })}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Custo Total"
-            value={formData.custo_total.toString()}
-            onChangeText={(text) => setFormData({ ...formData, custo_total: parseFloat(text) })}
-          />
-
-          <Button title="Enviar" onPress={handleEnviarResolucao} />
         </View>
       )}
     </View>
@@ -228,7 +132,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   picker: {
-    height: 40,
     marginBottom: 12,
   },
   itemContainer: {
@@ -252,11 +155,5 @@ const styles = StyleSheet.create({
     padding: 16,
     marginTop: 20,
     borderRadius: 8,
-  },
-  formContainer: {
-    backgroundColor: "white",
-    padding: 16,
-    borderRadius: 8,
-    marginTop: 20,
   },
 });

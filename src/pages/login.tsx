@@ -136,8 +136,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   icon: {
-    width: 20,
-    height: 20,
+  
     marginRight: 8,
   },
   input: {

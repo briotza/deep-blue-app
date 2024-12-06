@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView, View, Text, Dimensions } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 
-// Definindo a interface Acidente dentro do arquivo
 interface Acidente {
   id: number;
   titulo: string;
@@ -12,11 +11,13 @@ interface Acidente {
   horario: string;
   descricao: string;
   resolucao?: {
-    id: number;
-    descricao: string;
-    dataResolucao: string;
+      responsavel: string;
+      data: string;
+      descricao: string;
+      custo_total: number;
   };
 }
+
 
 // Função para calcular os incidentes por mês
 const calcularIncidentesPorMes = (dados: Acidente[]) => {

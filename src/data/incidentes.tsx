@@ -1,0 +1,77 @@
+const incidentes = [
+    {
+      id: 1,
+      titulo: "Acidente de Colisão",
+      tipo: "Segurança",
+      situacao: "Aberto",
+      data: "2024-06-05",
+      descricao: "Colisão entre dois veículos no pátio da plataforma.",
+      horario: "14:00",
+    },
+    {
+      id: 2,
+      titulo: "Queda de Equipamento",
+      tipo: "Segurança",
+      situacao: "Fechado",
+      data: "2024-02-04",
+      descricao: "Queda de equipamento durante operação de içamento.",
+      horario: "10:15",
+      resolucao: {
+        responsavel: "Maria Silva",
+        data: "2024-12-04",
+        descricao: "Equipamento foi recolhido e substituído. Treinamento adicional aplicado à equipe.",
+        custo_total: 5000,
+      },
+    },
+    {
+      id: 3,
+      titulo: "Incêndio no Motor",
+      tipo: "Segurança",
+      situacao: "Fechado",
+      data: "2024-08-30",
+      descricao: "Incêndio ocorrido em um motor de gerador.",
+      horario: "03:45",
+      resolucao: {
+        responsavel: "Carlos Pereira",
+        data: "2024-11-30",
+        descricao: "Incêndio controlado com extintores e motor substituído.",
+        custo_total: 20000,
+      },
+    },
+    {
+      id: 4,
+      titulo: "Derramamento de Óleo",
+      tipo: "Ambiental",
+      situacao: "Aberto",
+      data: "2024-07-06",
+      descricao: "Vazamento de óleo na linha principal de transferência.",
+      horario: "08:20",
+    },
+    {
+      id: 5,
+      titulo: "Acidente com Funcionário",
+      tipo: "Segurança",
+      situacao: "Fechado",
+      data: "2024-12-28",
+      descricao: "Funcionário atropelado por veículo de transporte interno.",
+      horario: "16:10",
+      resolucao: {
+        responsavel: "Ana Rocha",
+        data: "2024-11-29",
+        descricao: "Funcionário recebeu atendimento médico e política de segurança reforçada.",
+        custo_total: 3000,
+      },
+    },
+    {
+      id: 6,
+      titulo: "Falha Elétrica",
+      tipo: "Segurança",
+      situacao: "Aberto",
+      data: "2024-12-03",
+      descricao: "Falha elétrica no sistema de iluminação.",
+      horario: "21:00",
+    },
+  ];
+  
+  export default incidentes;
+  

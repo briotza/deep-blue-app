@@ -15,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const birthIcon = require('../assets/images/username.png');
 const emailIcon = require('../assets/images/email.png');
 const passwordIcon = require('../assets/images/password.png');
-const logo = require('../assets/images/black.png');
+const logo = require('../assets/images/deep-blue-logo.png');
 const facebook = require('../assets/images/facebook.png');
 const google = require('../assets/images/google.png');
 
@@ -63,7 +63,7 @@ const HomeScreen: React.FC = () => {
             {/* Logo e nome no topo */}
             <View style={styles.header}>
                 <Image source={logo} style={styles.logo} />
-                <Text style={styles.title}>Deep Blue</Text>
+                <Text style={styles.titleC}>Deep Blue</Text>
             </View>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>Crie uma conta</Text>
@@ -156,12 +156,21 @@ const styles = StyleSheet.create({
         paddingTop: 40,
     },
     header: {
+        width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 60,
+        justifyContent: 'center',
+        backgroundColor: '#150050',
+        borderRadius: 10,
+        padding: 16
     },
     titleContainer: {
         marginBottom: 30
+    },
+    titleC: {
+        color: 'white',
+        fontWeight: 'bold',
     },
     title: {
         fontSize: 24,
@@ -184,8 +193,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     icon: {
-        width: 20,
-        height: 20,
+       
     },
     logo: {
         width: 50,

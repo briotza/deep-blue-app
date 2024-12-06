@@ -11,9 +11,10 @@ interface Acidente {
   horario: string;
   descricao: string;
   resolucao?: {
-    id: number;
-    descricao: string;
-    dataResolucao: string;
+      responsavel: string;
+      data: string;
+      descricao: string;
+      custo_total: number;
   };
 }
 

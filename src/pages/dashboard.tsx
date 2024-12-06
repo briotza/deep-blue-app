@@ -4,8 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Seguranca from "../components/graficos/segurança";
 import Ambiental from "../components/graficos/ambiental";
+import incidentesData from "../data/incidentes";
+import notificacoesData from "../data/notificacoes";
 
-// Definição da interface do Acidente
 interface Acidente {
     id: number;
     titulo: string;
@@ -15,24 +16,35 @@ interface Acidente {
     horario: string;
     descricao: string;
     resolucao?: {
-        id: number;
+        responsavel: string;
+        data: string;
         descricao: string;
-        dataResolucao: string;
+        custo_total: number;
     };
 }
+
+interface Notificacao {
+    id: number;
+    titulo: string;
+    descricao: string;
+    data: string;
+}
+
 
 // Tela do Dashboard
 const Dashboard = ({ navigation }: any) => {
     const [lastUpdate, setLastUpdate] = useState<string>(new Date().toLocaleString());
     const [incidentes, setIncidentes] = useState<Acidente[]>([]);
+    const [notificacoes, setNotificacoes] = useState<Notificacao[]>([]);
+
 
     useEffect(() => {
-        const dadosIncidentes: Acidente[] = [
-            { id: 1, titulo: 'Incidente 1', tipo: 'Segurança', situacao: 'Concluído', data: '2024-11-10', horario: '10:00', descricao: 'Descrição do incidente 1' },
-            { id: 2, titulo: 'Incidente 2', tipo: 'Segurança', situacao: 'Em andamento', data: '2024-11-12', horario: '12:00', descricao: 'Descrição do incidente 2' },
-            { id: 3, titulo: 'Incidente 3', tipo: 'Ambiental', situacao: 'Em andamento', data: '2024-06-12', horario: '12:00', descricao: 'Descrição do incidente 3' },
-        ];
-        setIncidentes(dadosIncidentes);
+        setIncidentes(incidentesData);
+    }, []);
+
+
+    useEffect(() => {
+        setNotificacoes(notificacoesData);
     }, []);
 
     useEffect(() => {
@@ -96,6 +108,18 @@ const Dashboard = ({ navigation }: any) => {
                 <View style={styles.card}>
                     <Text style={styles.cardTitle}>Custos Recentes</Text>
                     <View>
+                        {incidentes
+                            .filter(incidente => incidente.situacao === "Fechado" && incidente.resolucao)
+                            .map(incidente => (
+                                <View key={incidente.id} style={styles.incidenteItem}>
+                                    <Text style={styles.incidenteTitulo}>{incidente.titulo}</Text>
+
+                                    <Text style={styles.incidenteData}>
+                                        Custo Total: R$ {incidente.resolucao?.custo_total}
+                                    </Text>
+                                </View>
+                            ))}
+
                     </View>
                 </View>
                 <View style={styles.card}>
@@ -119,7 +143,16 @@ const Dashboard = ({ navigation }: any) => {
             </View>
             <View style={styles.card}>
                 <Text style={styles.cardTitle}>Notificações</Text>
-                <View>
+                <View style={styles.grid}>
+                    {notificacoes.slice(0, 3).map((notificacao) => (
+                        <View key={notificacao.id} style={styles.incidenteItem}>
+                            <Text style={styles.incidenteTitulo}>{notificacao.titulo}</Text>
+                            <Text style={styles.incidenteData}>
+                                Data: {notificacao.data}
+                            </Text>
+                            <Text style={styles.incidenteDescricao}>{notificacao.descricao}</Text>
+                        </View>
+                    ))}
                 </View>
             </View>
         </ScrollView>
@@ -176,7 +209,9 @@ const styles = StyleSheet.create({
         color: '#888',
     },
     indicatorRow: {
-        flexDirection: 'row',
+        padding: 4,
+        alignItems: 'center',
+        flexDirection: 'column',
         justifyContent: 'space-between',
     },
     indicatorCard: {
@@ -214,6 +249,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         alignItems: 'center',
         marginHorizontal: 2
+    },
+    incidenteDescricao: {
+        fontSize: 14,
+        color: '#555',
     },
 });
 

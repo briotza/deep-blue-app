@@ -1,5 +1,6 @@
+import incidentes from "../data/incidentes";
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 
 type Resolucao = {
   data: string;
@@ -17,37 +18,12 @@ const Relatórios = () => {
   const [custosPorMes, setCustosPorMes] = useState<number[]>(Array(12).fill(0));
 
   useEffect(() => {
-    // Dados locais para testes (substitua por dados reais, se necessário)
-    const dadosLocais: Incidente[] = [
-      {
-        titulo: "Incidente 1",
-        situacao: "Fechado",
-        resolucao: {
-          data: "2024-02-15",
-          custo_total: 150.5,
-        },
-      },
-      {
-        titulo: "Incidente 2",
-        situacao: "Fechado",
-        resolucao: {
-          data: "2024-03-10",
-          custo_total: 200.75,
-        },
-      },
-      {
-        titulo: "Incidente 3",
-        situacao: "Aberto",
-      },
-    ];
-
-    // Filtro e cálculo de custos por mês
-    const incidentesComResolucao = dadosLocais.filter(
+    const incidentesFiltrados = incidentes.filter(
       (incidente) => incidente.resolucao && incidente.situacao === "Fechado"
     );
 
     const custos = Array(12).fill(0);
-    incidentesComResolucao.forEach((incidente) => {
+    incidentesFiltrados.forEach((incidente) => {
       const dataResolucao = incidente.resolucao?.data;
       const custoTotal = incidente.resolucao?.custo_total;
 
@@ -57,7 +33,7 @@ const Relatórios = () => {
       }
     });
 
-    setIncidentesComResolucao(incidentesComResolucao);
+    setIncidentesComResolucao(incidentesFiltrados);
     setCustosPorMes(custos);
   }, []);
 
@@ -81,8 +57,7 @@ const Relatórios = () => {
   ];
 
   return (
-    <ScrollView style={styles.container}>
-      {/* Tabela de incidentes */}
+    <View style={styles.container}>
       <View style={styles.tableContainer}>
         <FlatList
           data={incidentesComResolucao}
@@ -98,8 +73,7 @@ const Relatórios = () => {
           )}
         />
       </View>
-
-    </ScrollView>
+    </View>
   );
 };
 
@@ -127,22 +101,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 14,
     color: "#333",
-  },
-  chartContainer: {
-    backgroundColor: "#fff",
-    borderRadius: 8,
-    padding: 16,
-    alignItems: "center",
-  },
-  chartText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  chartArea: {
-    width: "100%",
-    height: 200,
-    backgroundColor: "#ddd",
   },
 });
 
