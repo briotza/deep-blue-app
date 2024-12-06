@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const birthIcon = require('../assets/images/username.png');
 const emailIcon = require('../assets/images/email.png');
@@ -20,6 +21,7 @@ const google = require('../assets/images/google.png');
 
 type RootStackParamList = {
     Home: undefined;
+    Login: undefined;
     Dashboard: undefined;
 };
 
@@ -32,7 +34,6 @@ const HomeScreen: React.FC = () => {
     const [birthday, setBirthday] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState<string | null>(null);
 
     const handleSignup = async () => {
         if (!username || !birthday || !email || !password) {
@@ -40,44 +41,35 @@ const HomeScreen: React.FC = () => {
             return;
         }
 
-        try {
-            const response = await fetch('http://192.168.229.67/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: username,
-                    email,
-                    password,
-                    birthday,
-                }),
-            });
+        const newUser = { name: username, email, birthday, password };
 
-            if (response.status === 201) {
-                const data = await response.json();
-                console.log('Usuário registrado com sucesso:', data);
-                Alert.alert('Sucesso', 'Conta criada com sucesso!');
-                navigation.navigate('Dashboard');
-            } else {
-                setError('Erro ao registrar usuário.');
-                Alert.alert('Erro', 'Ocorreu um erro ao tentar registrar o usuário.');
-            }
+        try {
+            await AsyncStorage.setItem('userData', JSON.stringify(newUser));
+            Alert.alert('Sucesso', 'Conta criada com sucesso!');
+
+            setUsername('');
+            setBirthday('');
+            setEmail('');
+            setPassword('');
+
+            navigation.navigate('Login');
         } catch (error) {
-            setError('Ocorreu um erro ao tentar registrar o usuário.');
-            console.error(error);
-            Alert.alert('Erro', 'Não foi possível se comunicar com o servidor.');
+            Alert.alert('Erro', 'Erro ao salvar dados no armazenamento local.');
         }
     };
 
     return (
         <View style={styles.container}>
-            <View style={styles.title}>
+            {/* Logo e nome no topo */}
+            <View style={styles.header}>
                 <Image source={logo} style={styles.logo} />
                 <Text style={styles.title}>Deep Blue</Text>
             </View>
-            <Text style={styles.title}>Crie uma conta</Text>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Crie uma conta</Text>
+            </View>
 
+            {/* Campos de cadastro */}
             <View style={styles.inputContainer}>
                 <Image source={birthIcon} style={styles.icon} />
                 <TextInput
@@ -145,7 +137,7 @@ const HomeScreen: React.FC = () => {
                 Já tem uma conta?{' '}
                 <Text
                     style={styles.boldText}
-                    onPress={() => navigation.navigate('Dashboard')}
+                    onPress={() => navigation.navigate('Login')}
                 >
                     Entrar
                 </Text>
@@ -159,13 +151,22 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         paddingHorizontal: 16,
+        paddingTop: 40,
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 60,
+    },
+    titleContainer: {
+        marginBottom: 30
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginLeft: 10,
     },
     inputContainer: {
         flexDirection: 'row',
@@ -189,7 +190,6 @@ const styles = StyleSheet.create({
     logo: {
         width: 50,
         height: 50,
-        marginBottom: 20,
     },
     button: {
         backgroundColor: '#150050',
