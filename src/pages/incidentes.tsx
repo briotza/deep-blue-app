@@ -1,5 +1,7 @@
+import { Text } from "react-native";
+
 export default function Incidentes() {
     return(
-        <p>Incidentes</p>
+        <Text>Incidentes</Text>
     )
 }
