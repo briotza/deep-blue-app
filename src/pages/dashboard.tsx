@@ -94,8 +94,6 @@ const Dashboard = ({ navigation }: any) => {
             </View>
             <View style={styles.column}>
                 <View style={styles.card}>
-                </View>
-                <View style={styles.card}>
                     <Text style={styles.cardTitle}>Custos Recentes</Text>
                     <View>
                     </View>
