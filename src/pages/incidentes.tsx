@@ -47,7 +47,7 @@ const initialAcidentes: Acidente[] = [
   // Adicione mais acidentes conforme necessário
 ];
 
-export default function ListaAcidentes() {
+export default function Incidentes() {
   const [acidentes, setAcidentes] = useState<Acidente[]>(initialAcidentes);
   const [filtroTexto, setFiltroTexto] = useState<string>("");
   const [filtroSituacao, setFiltroSituacao] = useState<string>("Todos");
